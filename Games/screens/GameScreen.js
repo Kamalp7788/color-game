@@ -72,62 +72,56 @@ export const LevelScreen2 = ({navigation}) => {
     console.log('cardPosition3', cardPosition3);
     console.log('cardPosition2', cardPosition2);
     console.log('cardPosition1', cardPosition1);
-    if (data.pageY > 400) {
+
+    if (
+      cardPosition1.py + 20 > boxPosition.py &&
+      boxPosition.px > 80 &&
+      boxPosition.px < width - 80
+    ) {
       if (itemList[0].value.toLowerCase() === boxColor.color) {
-        alert('success');
+        alert('Success');
+        dispatch(increment());
+        setGameLevel(gameLevel + 1);
+        setItemList(shuffle(itemList));
       } else {
         alert('failed');
+        navigation.navigate('Start');
+      }
+    } else if (boxPosition.px < 80) {
+      if (itemList[2].value.toLowerCase() === boxColor.color) {
+        alert('Success');
+        dispatch(increment());
+        setGameLevel(gameLevel + 1);
+        setItemList(shuffle(itemList));
+      } else {
+        alert('failed');
+        navigation.navigate('Start');
+      }
+    } else if (boxPosition.px > width - 80) {
+      if (itemList[2].value.toLowerCase() === boxColor.color) {
+        alert('Success');
+        dispatch(increment());
+        setGameLevel(gameLevel + 1);
+        setItemList(shuffle(itemList));
+      } else {
+        alert('failed');
+        navigation.navigate('Start');
+      }
+    } else if (
+      cardPosition4.py < boxPosition.py + 155 &&
+      boxPosition.px > 80 &&
+      boxPosition.px < width - 80
+    ) {
+      if (itemList[3].value.toLowerCase() === boxColor.color) {
+        alert('Success');
+        dispatch(increment());
+        setGameLevel(gameLevel + 1);
+        setItemList(shuffle(itemList));
+      } else {
+        alert('failed');
+        navigation.navigate('Start');
       }
     }
-    // if (
-    //   cardPosition1.py + 20 > boxPosition.py &&
-    //   boxPosition.px > 80 &&
-    //   boxPosition.px < width - 80
-    // ) {
-    //   if (itemList[0].value.toLowerCase() === boxColor.color) {
-    //     alert('Success');
-    //     dispatch(increment());
-    //     setGameLevel(gameLevel + 1);
-    //     setItemList(shuffle(itemList));
-    //   } else {
-    //     alert('failed');
-    //     navigation.navigate('Start');
-    //   }
-    // } else if (boxPosition.px < 80) {
-    //   if (itemList[2].value.toLowerCase() === boxColor.color) {
-    //     alert('Success');
-    //     dispatch(increment());
-    //     setGameLevel(gameLevel + 1);
-    //     setItemList(shuffle(itemList));
-    //   } else {
-    //     alert('failed');
-    //     navigation.navigate('Start');
-    //   }
-    // } else if (boxPosition.px > width - 80) {
-    //   if (itemList[2].value.toLowerCase() === boxColor.color) {
-    //     alert('Success');
-    //     dispatch(increment());
-    //     setGameLevel(gameLevel + 1);
-    //     setItemList(shuffle(itemList));
-    //   } else {
-    //     alert('failed');
-    //     navigation.navigate('Start');
-    //   }
-    // } else if (
-    //   cardPosition4.py < boxPosition.py + 155 &&
-    //   boxPosition.px > 80 &&
-    //   boxPosition.px < width - 80
-    // ) {
-    //   if (itemList[3].value.toLowerCase() === boxColor.color) {
-    //     alert('Success');
-    //     dispatch(increment());
-    //     setGameLevel(gameLevel + 1);
-    //     setItemList(shuffle(itemList));
-    //   } else {
-    //     alert('failed');
-    //     navigation.navigate('Start');
-    //   }
-    // }
   };
   const onDrag = e => {
     console.log('darag dmove data ee', {...e});
