@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import {increment} from '../Redux/CounterSlice';
+import {increment, resetList} from '../Redux/CounterSlice';
 import {useDispatch, useSelector} from 'react-redux';
+import {ImageBackground, StatusBar} from 'react-native';
 
 const SafeAreaView = styled.View`
   flex: 1;
@@ -44,23 +45,32 @@ const CountTitle = styled.Text`
 `;
 
 const StartScreen = ({navigation}) => {
+  const ActionData = () => {
+    navigation.navigate('Game');
+    dispatch(resetList());
+  };
   const {count} = useSelector(state => state.counter);
   const dispatch = useDispatch();
   return (
     <SafeAreaView>
-      <Wrapper>
-        <Title>Color Names</Title>
-        <TitleDesc>Drag the cube to the side with the correct</TitleDesc>
-        <TitleDesc>name of the color in English. </TitleDesc>
-        <TitleDesc>Ignore the actual side's color.</TitleDesc>
-      </Wrapper>
-      <Button activeOpacity={1} onPress={() => navigation.navigate('Game')}>
-        <ButtonTitle>PLAY</ButtonTitle>
-      </Button>
-      <Wrapper>
-        <CountTitle>BEST SCORE</CountTitle>
-        <CountTitle>{count}</CountTitle>
-      </Wrapper>
+      <ImageBackground
+        source={require('../assest/Image/game.jpeg')}
+        style={{height: '100%', width: '100%'}}>
+        <StatusBar hidden />
+        <Wrapper>
+          <Title>Color Names</Title>
+          <TitleDesc>Drag the cube to the side with the correct</TitleDesc>
+          <TitleDesc>name of the color in English. </TitleDesc>
+          <TitleDesc>Ignore the actual side's color.</TitleDesc>
+        </Wrapper>
+        <Button onPress={ActionData}>
+          <ButtonTitle>PLAY</ButtonTitle>
+        </Button>
+        <Wrapper>
+          <CountTitle>BEST SCORE</CountTitle>
+          <CountTitle>{count}</CountTitle>
+        </Wrapper>
+      </ImageBackground>
     </SafeAreaView>
   );
 };

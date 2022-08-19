@@ -1,10 +1,10 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import StartScreen from './android/Games/screens/StartScreen';
+import StartScreen from './Games/screens/StartScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import GameScreen from './android/Games/screens/GameScreen';
 import {Provider} from 'react-redux';
-import {Store} from './android/Games/Redux/Store';
+import {Store} from './Games/Redux/Store';
+import GameScreen from './Games/screens/GameScreen';
 const App = () => {
   const Stack = createNativeStackNavigator();
   return (
