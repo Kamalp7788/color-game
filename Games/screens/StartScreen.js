@@ -63,7 +63,7 @@ const StartScreen = ({navigation}) => {
           <TitleDesc>name of the color in English. </TitleDesc>
           <TitleDesc>Ignore the actual side's color.</TitleDesc>
         </Wrapper>
-        <Button onPress={ActionData}>
+        <Button onPress={ActionData} activityOpacity={1}>
           <ButtonTitle>PLAY</ButtonTitle>
         </Button>
         <Wrapper>

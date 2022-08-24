@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Draggable from 'react-native-draggable';
 import {increment, resetList} from '../Redux/CounterSlice';
 import {useDispatch, useSelector} from 'react-redux';
@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 const {width} = Dimensions.get('window');
-export const LevelScreen2 = ({navigation}) => {
+export const GameScreen = ({navigation}) => {
   const {count} = useSelector(state => state.counter);
   const dispatch = useDispatch();
   const cardRef1 = useRef();
@@ -60,6 +60,10 @@ export const LevelScreen2 = ({navigation}) => {
     setBoxColor(a[gameLevel % 4]);
     return a;
   }
+
+  useEffect(() => {
+    setItemList(shuffle);
+  }, [itemList]);
   const ActionDragRelease = e => {
     console.log('drag data ', e.nativeEvent);
     const data = e.nativeEvent;
@@ -67,12 +71,11 @@ export const LevelScreen2 = ({navigation}) => {
       py: data.pageY - 100,
       px: data.pageX,
     };
-    console.log('boxPosition ', boxPosition);
-    console.log('cardPosition4', cardPosition4);
-    console.log('cardPosition3', cardPosition3);
-    console.log('cardPosition2', cardPosition2);
-    console.log('cardPosition1', cardPosition1);
-
+    // console.log('boxPosition ', boxPosition);
+    // console.log('cardPosition4', cardPosition4);
+    // console.log('cardPosition3', cardPosition3);
+    // console.log('cardPosition2', cardPosition2);
+    // console.log('cardPosition1', cardPosition1);
     if (
       cardPosition1.py + 20 > boxPosition.py &&
       boxPosition.px > 80 &&
@@ -88,7 +91,7 @@ export const LevelScreen2 = ({navigation}) => {
         navigation.navigate('Start');
       }
     } else if (boxPosition.px < 80) {
-      if (itemList[2].value.toLowerCase() === boxColor.color) {
+      if (itemList[1].value.toLowerCase() === boxColor.color) {
         alert('Success');
         dispatch(increment());
         setGameLevel(gameLevel + 1);
@@ -176,6 +179,7 @@ export const LevelScreen2 = ({navigation}) => {
         };
       });
   };
+
   return (
     <ImageBackground
       source={require('../assest/Image/game.jpeg')}
@@ -191,11 +195,10 @@ export const LevelScreen2 = ({navigation}) => {
             <View
               ref={cardRef2}
               style={[styles.cardView2, {backgroundColor: itemList[1].color}]}>
-              <Text style={styles.txt}>{itemList[1].value}</Text>
+              <Text style={styles.txt1}>{itemList[1].value}</Text>
             </View>
             <CountDown
               until={10}
-              // onFinish={() => alert('finished')}
               size={80}
               timeToShow={'S'}
               style={{backgroundColor: '#fff', opacity: 0.3, marginTop: 30}}
@@ -203,7 +206,7 @@ export const LevelScreen2 = ({navigation}) => {
             <View
               ref={cardRef3}
               style={[styles.cardView3, {backgroundColor: itemList[2].color}]}>
-              <Text style={styles.txt}>{itemList[2].value}</Text>
+              <Text style={styles.txt1}>{itemList[2].value}</Text>
             </View>
           </View>
           <View
@@ -232,7 +235,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#00000070',
   },
   body: {
     backgroundColor: 'lightGray',
@@ -255,7 +257,6 @@ const styles = StyleSheet.create({
     width: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    // zIndex: 22,
   },
   cardView4: {
     height: 40,
@@ -265,7 +266,7 @@ const styles = StyleSheet.create({
     bottom: 40,
   },
   txt: {
-    fontSize: 38,
+    fontSize: 32,
     fontWeight: '600',
     color: '#fff',
   },
@@ -273,13 +274,11 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: '600',
     color: '#fff',
-    width: 20,
     textAlign: 'center',
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // zIndex: 11111,
   },
   countdownTxt: {
     fontSize: 60,
@@ -304,4 +303,4 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-export default LevelScreen2;
+export default GameScreen;
